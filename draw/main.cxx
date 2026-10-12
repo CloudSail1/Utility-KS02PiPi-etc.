@@ -11,7 +11,6 @@ const size_t      kNProcessDefault = 20;
 const size_t      kNBin            = 100;
 const std::string kNoDraw          = "0";
 const std::string kDrawAll         = "1";
-const std::string kTreeName        = "chi2omg";
 const bool        kNormalize       = false;
 
 DrawParams json_to_draw_params(const json &j_defaults, const json &j_item) {
@@ -34,6 +33,7 @@ DrawParams json_to_draw_params(const json &j_defaults, const json &j_item) {
 
     p.lo        = get_num("lo");
     p.up        = get_num("up");
+    p.tree_name = get_str("tree_name");
     p.target    = get_str("target");
     p.title     = get_str("title");
     p.outname   = get_str("outname");
@@ -131,8 +131,8 @@ int main(int argc, char* argv[]) {
 
 void draw(const DrawParams &params)
 {
-    auto chain_inmc = open_root(params.inmc_list);
-    auto chain_data = open_root(params.data_list);
+    auto chain_inmc = open_root(params.inmc_list, params.tree_name);
+    auto chain_data = open_root(params.data_list, params.tree_name);
     std::vector<TH1D*> th1d_inmc;
     th1d_inmc.push_back(new TH1D("th1d_sig", "th1d_sig", params.n_bin, params.lo, params.up));
     th1d_inmc.push_back(new TH1D("th1d_err", "th1d_err", params.n_bin, params.lo, params.up));

@@ -2,6 +2,7 @@
   "defaults": {
     "lo": 0,
     "up": 0.2,
+    "tree_name": "chi2omg",
     "target": "e_Gamma_frameKshort",
     "title": "#E_{#gamma}#hbox{ in }K^{0}_{S}#hbox{ frame}",
     "outname": "output/default.png",

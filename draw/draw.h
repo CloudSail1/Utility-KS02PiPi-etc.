@@ -2,7 +2,6 @@
 #include <ROOT/TProcessExecutor.hxx>
 #include "TChain.h"
 
-extern const std::string kTreeName;
 /*
 extern const std::string kInmcList;
 extern const std::string kDataList;
@@ -21,6 +20,7 @@ extern const std::string kExpData;
 struct DrawParams{
     double       lo        ;
     double       up        ;
+    std::string  tree_name ;
     std::string  target    ;
     std::string  title     ;
     std::string  outname   ;
@@ -56,7 +56,7 @@ struct DrawParams{
         std::abort(); \
     } while(0)
 
-TChain* open_root(const std::string &filename, const std::string &treename=kTreeName);
+TChain* open_root(const std::string &filename, const std::string &treename);
 void draw(const DrawParams &params);
 bool is_suffix_root(const std::string &str) {
     return str.size()>=5 && str.substr(str.size()-5)==".root";
