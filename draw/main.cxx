@@ -12,7 +12,6 @@ const size_t      kNBin            = 100;
 const std::string kNoDraw          = "0";
 const std::string kDrawAll         = "1";
 const std::string kTreeName        = "chi2omg";
-const std::string kJsonFile        = "../../draw/params.json";
 const bool        kNormalize       = false;
 
 DrawParams json_to_draw_params(const json &j_defaults, const json &j_item) {
@@ -84,11 +83,17 @@ DrawParams json_to_draw_params(const json &j_defaults, const json &j_item) {
     return p;
 }
 
-int main() {
+int main(int argc, char* argv[]) {
+    if (argc != 2) {
+        std::cerr << "Error: requiring a argument to a json file\n";
+        return 1;
+    }
+    const char* json_file = argv[1];
+
     // Read JSON file
-    std::ifstream jf(kJsonFile);
+    std::ifstream jf(json_file);
     if (!jf.is_open()) {
-        std::cerr << "PANIC: fail to open " << kJsonFile << std::endl;
+        std::cerr << "PANIC: fail to open " << json_file << std::endl;
         std::abort();
     }
     json j;

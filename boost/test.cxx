@@ -194,10 +194,16 @@ bool process_file(const std::string &listname)
     pool.Map(workItem, lines);
     return true;
 }
-int main()
+int main(int argc, char* argv[])
 {
+    if (argc != 2) {
+        std::cerr << "Error: requiring a argument to a root file or list\n";
+        return 1;
+    }
+    const char* input_file = argv[1];
+
     // manual mkdir first
-    process_file("boost.list");
+    process_file(input_file);
     // write_into("/scratchfs/bes/cloudsail/JpsiToPiKKshort/generator/IB/run/mc_job/selected.root");
     // process_file("../../inmc.list");
     // process_file("../../data.list");

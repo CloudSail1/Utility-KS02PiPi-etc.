@@ -7,3 +7,4 @@ todo:
     Refactor root file I/O to use read module.
     Refector parallel tasks to use one or more loop per task, instead of calling
         `boost/test.cxx/process_file()` per task with an internal loop.
+    Add input file name into args of main()
